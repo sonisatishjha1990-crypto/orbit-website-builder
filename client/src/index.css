@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-base text-ink antialiased;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    background-image:
+      radial-gradient(60% 45% at 12% -10%, rgba(99, 102, 241, 0.16), transparent 70%),
+      radial-gradient(45% 40% at 92% 0%, rgba(34, 211, 238, 0.1), transparent 70%);
+    background-attachment: fixed;
+  }
+  ::selection {
+    background: rgba(99, 102, 241, 0.35);
+  }
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: #262634;
+    border-radius: 8px;
+    border: 2px solid #08080c;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-2xl border border-line bg-panel/80 backdrop-blur;
+  }
+  .card-hover {
+    @apply transition duration-200 hover:border-accent/40 hover:bg-panel2/80 hover:shadow-glow;
+  }
+  .label {
+    @apply mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.14em] text-dim;
+  }
+  .input {
+    @apply w-full rounded-xl border border-line bg-panel2 px-3.5 py-2.5 text-sm text-ink
+      placeholder:text-dim/60 transition focus:border-accent/70 focus:outline-none
+      focus:ring-2 focus:ring-accent/25;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold
+      transition duration-150 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply btn bg-gradient-to-r from-accent to-accent2 text-white shadow-glow
+      hover:brightness-110 active:scale-[0.99];
+  }
+  .btn-ghost {
+    @apply btn border border-line bg-panel2/60 text-ink hover:border-accent/50 hover:bg-panel2;
+  }
+  .btn-danger {
+    @apply btn border border-rose-500/30 bg-rose-500/10 text-rose-300 hover:bg-rose-500/20;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-line bg-panel2 px-2.5 py-1
+      text-[11px] font-medium text-dim;
+  }
+  .nav-item {
+    @apply flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-dim
+      transition hover:bg-panel2 hover:text-ink;
+  }
+  .nav-item-active {
+    @apply bg-panel2 text-ink shadow-[inset_0_0_0_1px_rgba(99,102,241,0.35)];
+  }
+  .skel {
+    @apply relative overflow-hidden rounded-lg bg-panel2;
+  }
+  .skel::after {
+    content: '';
+    @apply absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/5 to-transparent;
+    animation: shimmer 1.6s infinite;
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: rise 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.fade-in {
+  animation: rise 0.3s ease both;
+}
